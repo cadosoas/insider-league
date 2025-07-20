@@ -34,7 +34,7 @@ class PrepareSimulationDataTest extends TestCase
 
         // run the PrepareSimulationData phase
         $result = (new PrepareSimulationData())
-            ->handle($simulation, fn($simulation) => $simulation);
+            ->handle($simulation, fn ($simulation) => $simulation);
 
         // verify simulation properties
         $this->assertEquals(3, $result->getRemainingMatches());

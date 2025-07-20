@@ -11,7 +11,6 @@ use Tests\TestCase;
 
 class RemoveEliminatedTeamsTest extends TestCase
 {
-
     public function test_sets_possibility_false_for_eliminated_teams()
     {
         // create teams
@@ -32,7 +31,7 @@ class RemoveEliminatedTeamsTest extends TestCase
             ]);
 
         // run the RemoveEliminatedTeams phase
-        $result = (new RemoveEliminatedTeams())->handle($simulation, fn($simulation) => $simulation);
+        $result = (new RemoveEliminatedTeams())->handle($simulation, fn ($simulation) => $simulation);
 
         // verify that the predictions were updated
         $predictions = $result->getPredictions();

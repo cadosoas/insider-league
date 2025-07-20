@@ -31,7 +31,7 @@ class MarkGuaranteedChampionsTest extends TestCase
             ]);
 
         // simulate the next phase
-        $next = fn() => throw new \Exception('Next should not be called');
+        $next = fn () => throw new \Exception('Next should not be called');
 
         // run the MarkGuaranteedChampions phase
         $result = (new MarkGuaranteedChampions())->handle($simulation, $next);
@@ -40,7 +40,8 @@ class MarkGuaranteedChampionsTest extends TestCase
         $this->assertTrue($result->getIsChampionGuaranteed());
 
         // verify the predictions
-        $predictions = $result->getPredictions();;
+        $predictions = $result->getPredictions();
+        ;
         $this->assertEquals(100, Arr::get($predictions, "0.percentage"));
         $this->assertTrue(Arr::get($predictions, "0.possibility"));
         $this->assertEquals(0, Arr::get($predictions, "1.percentage"));
