@@ -58,6 +58,11 @@ jobs:
           php artisan key:generate
           php artisan route:cache
       - name: Create Extra Databases
+        env:
+          MYSQL_HOST: "127.0.0.1"
+          MYSQL_ROOT_PASSWORD: password
+          MYSQL_DATABASE: laravel
+          MYSQL_USER: sail
         run: bash ./docker/database/create-testing-database.sh
       - name: Run PHPUnit
         env:
