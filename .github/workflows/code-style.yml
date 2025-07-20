@@ -1,0 +1,35 @@
+name: Laravel Pint Format
+
+on:
+  push:
+    branches:
+      - "master"
+
+jobs:
+  pint:
+    name: Run Pint and Auto Commit
+    runs-on: ubuntu-22.04
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: 8.3
+          extensions: curl, dom, mbstring, libxml, zip, pcntl, pdo, pdo_mysql
+          ini-values: error_reporting=E_ALL
+          tools: composer:v2
+          coverage: none
+
+      - name: Install dependencies
+        run: composer install --no-interaction --no-progress
+
+      - name: Run Laravel Pint
+        run: vendor/bin/pint
+
+      - name: Commit formatting changes
+        uses: stefanzweifel/git-auto-commit-action@v5
+        with:
+          commit_message: "style: apply Laravel Pint formatting"
+          commit_author: github-actions[bot] <41898282+github-actions[bot]@users.noreply.github.com>
