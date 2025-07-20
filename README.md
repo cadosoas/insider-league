@@ -42,3 +42,11 @@ cd frontend
 npm install
 npm run dev
 ```
+
+---
+
+## 🧪 Tests
+
+```bash
+./vendor/bin/sail artisan test
+```
