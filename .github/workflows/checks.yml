@@ -51,13 +51,14 @@ jobs:
           ini-values: error_reporting=E_ALL
           tools: composer:v2
           coverage: xdebug
-      - name: Prepare Application
+      - name: Install dependencies & prepare Laravel
         run: |
           composer install --no-interaction --no-progress
           cp .env.example .env
           php artisan key:generate
-          php artisan migrate --force
           php artisan route:cache
+      - name: Create Extra Databases
+        run: bash ./docker/database/create-testing-database.sh
       - name: Run PHPUnit
         env:
           DB_HOST: "127.0.0.1"
