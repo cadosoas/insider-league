@@ -42,7 +42,7 @@ class SimulateChampionshipTest extends TestCase
             ]);
 
         // run the simulation phases
-        $result = (new SimulateChampionship())->handle($simulation, fn($simulation) => $simulation);
+        $result = (new SimulateChampionship())->handle($simulation, fn ($simulation) => $simulation);
 
         // verify the predictions
         $predictions = $result->getPredictions();
