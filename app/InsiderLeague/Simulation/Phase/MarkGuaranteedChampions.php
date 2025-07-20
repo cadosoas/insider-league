@@ -3,6 +3,8 @@
 namespace App\InsiderLeague\Simulation\Phase;
 
 use App\InsiderLeague\Simulation\Simulation;
+use App\Models\Table;
+use Illuminate\Support\Collection;
 
 class MarkGuaranteedChampions
 {
@@ -11,13 +13,13 @@ class MarkGuaranteedChampions
         $table = $simulation->getTable();
         $maxPoints = $simulation->getMaxPoints();
 
-        foreach ($table as $team) {
-            if ($this->isChampionGuaranteed($team, $table, $maxPoints)) {
+        foreach ($table as $row) {
+            if ($this->isChampionGuaranteed($row, $table, $maxPoints)) {
 
                 $predictions = $simulation->getPredictions();
 
                 foreach ($predictions as &$prediction) {
-                    if ($prediction['team']['id'] === $team->team->id) {
+                    if ($prediction['team']['id'] === $row->team->id) {
                         $prediction['percentage'] = 100;
                         $prediction['possibility'] = true;
                     } else {
@@ -37,14 +39,19 @@ class MarkGuaranteedChampions
     }
 
     /**
-     * if a team is guaranteed to be champion
+     * Check if a team is guaranteed to be champion
+     *
+     * @param Table $row
+     * @param Collection<int, Table> $table
+     * @param integer $maxPoints
+     * @return boolean
      */
-    public function isChampionGuaranteed($team, $table, $maxPoints): bool
+    public function isChampionGuaranteed(Table $row, Collection $table, int $maxPoints): bool
     {
-        $teamPoints = $team->points;
+        $teamPoints = $row->points;
 
         foreach ($table as $other) {
-            if ($other->id === $team->id) {
+            if ($other->id === $row->id) {
                 continue;
             }
 

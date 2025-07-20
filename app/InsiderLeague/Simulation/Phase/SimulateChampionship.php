@@ -20,12 +20,12 @@ class SimulateChampionship
         // need fake table for simulation
         $fakeTable = $simulation
             ->getTable()
-            ->mapWithKeys(fn ($item) => [$item->team->id => $item->points])
+            ->mapWithKeys(fn($item) => [$item->team->id => $item->points])
             ->toArray();
 
         // default champions array
         $champions = collect($simulation->getTable())
-            ->mapWithKeys(fn ($item) => [$item->team->id => 0])
+            ->mapWithKeys(fn($item) => [$item->team->id => 0])
             ->toArray();
 
         // run simulations
@@ -64,7 +64,14 @@ class SimulateChampionship
         return $next($simulation);
     }
 
-    public function updatePredictions($simulation, $champions)
+    /**
+     * Update the predictions with the champions percentages
+     *
+     * @param Simulation $simulation
+     * @param array $champions
+     * @return Simulation
+     */
+    public function updatePredictions(Simulation $simulation, array $champions): Simulation
     {
         $predictions = $simulation->getPredictions();
 
@@ -87,7 +94,13 @@ class SimulateChampionship
         return $simulation;
     }
 
-    public function calculateFixture($fixture)
+    /**
+     * Calculate the points for a fixture based on team strength and form
+     *
+     * @param Fixture $fixture
+     * @return array
+     */
+    public function calculateFixture(Fixture $fixture): array
     {
         $homeAdvantage = 0.1; // home advantage factor
 
@@ -132,7 +145,13 @@ class SimulateChampionship
         return [$homePoints, $awayPoints];
     }
 
-    public function getChampionTeamId($simulationTable)
+    /**
+     * Get the champion team ID from the simulation table
+     *
+     * @param array $simulationTable
+     * @return int|null
+     */
+    public function getChampionTeamId(array $simulationTable): ?int
     {
         return collect($simulationTable)
             ->sortDesc()
@@ -140,17 +159,29 @@ class SimulateChampionship
             ->first();
     }
 
-    public function calculateChampionsPercentage($champions): array
+    /**
+     * Calculate the percentage of each team being champion based on the simulation results
+     *
+     * @param array $champions
+     * @return array
+     */
+    public function calculateChampionsPercentage(array $champions): array
     {
         $totalSimulations = array_sum($champions);
 
         return collect($champions)
-            ->map(fn ($count) => round(($count / $totalSimulations) * 100, 2))
+            ->map(fn($count) => round(($count / $totalSimulations) * 100, 2))
             ->sortDesc()
             ->toArray();
     }
 
-    public function getTeamForm($team)
+    /**
+     * Get the form of a team based on the last 3 matches
+     *
+     * @param $team
+     * @return float
+     */
+    public function getTeamForm($team): float
     {
         $matches = Fixture::played()
             ->where(function ($query) use ($team) {
@@ -162,7 +193,7 @@ class SimulateChampionship
             ->get();
 
         if ($matches->isEmpty()) {
-            return 0;
+            return 0.0;
         }
 
         // calculate the form based on the last 3 matches

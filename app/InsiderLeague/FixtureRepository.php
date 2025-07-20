@@ -7,20 +7,38 @@ use Illuminate\Support\Collection;
 
 class FixtureRepository
 {
+    /**
+     * Get a collection of fixtures with their associated teams.
+     *
+     * @return Collection
+     */
     public function getList(): Collection
     {
         return Fixture::with(['home', 'away'])->orderBy('week')->get();
     }
 
+    /**
+     * Play a fixture and update the associated tables.
+     *
+     * @param Fixture $fixture
+     * @param Collection $tables
+     * @return void
+     */
     public function playFixture(Fixture $fixture, Collection $tables): void
     {
+        // fixture play
         $fixture->play();
 
+        // update fixture scores
         $fixture->update([
             'home_score' => $fixture->home_score,
             'away_score' => $fixture->away_score,
             'played_at' => now(),
         ]);
+
+        ///////////////////////////////////
+        // update tables
+        ///////////////////////////////////
 
         $homeScore = $fixture->home_score;
         $awayScore = $fixture->away_score;
