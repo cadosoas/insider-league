@@ -20,12 +20,12 @@ class SimulateChampionship
         // need fake table for simulation
         $fakeTable = $simulation
             ->getTable()
-            ->mapWithKeys(fn($item) => [$item->team->id => $item->points])
+            ->mapWithKeys(fn ($item) => [$item->team->id => $item->points])
             ->toArray();
 
         // default champions array
         $champions = collect($simulation->getTable())
-            ->mapWithKeys(fn($item) => [$item->team->id => 0])
+            ->mapWithKeys(fn ($item) => [$item->team->id => 0])
             ->toArray();
 
         // run simulations
@@ -170,7 +170,7 @@ class SimulateChampionship
         $totalSimulations = array_sum($champions);
 
         return collect($champions)
-            ->map(fn($count) => round(($count / $totalSimulations) * 100, 2))
+            ->map(fn ($count) => round(($count / $totalSimulations) * 100, 2))
             ->sortDesc()
             ->toArray();
     }

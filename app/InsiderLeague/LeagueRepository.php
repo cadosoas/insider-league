@@ -55,7 +55,7 @@ class LeagueRepository
             $schedule[] = $week;
         }
 
-        $secondHalf = array_map(fn($week) => array_map(fn($m) => [$m[1], $m[0]], $week), $schedule);
+        $secondHalf = array_map(fn ($week) => array_map(fn ($m) => [$m[1], $m[0]], $week), $schedule);
         $fullSchedule = array_merge($schedule, $secondHalf);
 
         ///////////////////////////////////
