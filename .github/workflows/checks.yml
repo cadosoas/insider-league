@@ -25,41 +25,41 @@ jobs:
       - name: Run PHPStan
         run: vendor/bin/phpstan analyse --memory-limit=1G
 
-phpunit:
-  name: PHPUnit
-  runs-on: ubuntu-22.04
-  services:
-    mysql:
-      image: mysql:8.0
-      ports:
-        - 3306:3306
-      env:
-        MYSQL_ROOT_PASSWORD: password
-        MYSQL_ROOT_HOST: "%"
-        MYSQL_DATABASE: laravel
-        MYSQL_USER: sail
-        MYSQL_PASSWORD: password
-        MYSQL_ALLOW_EMPTY_PASSWORD: 1
-      options: --health-cmd="mysqladmin ping" --health-interval=10s --health-timeout=5s --health-retries=3
-  steps:
-    - uses: actions/checkout@v4
-    - name: Setup PHP
-      uses: shivammathur/setup-php@v2
-      with:
-        php-version: 8.3
-        extensions: curl, dom, mbstring, libxml, zip, pcntl, pdo, pdo_mysql
-        ini-values: error_reporting=E_ALL
-        tools: composer:v2
-        coverage: xdebug
-    - name: Prepare Application
-      run: |
-        composer install --no-interaction --no-progress
-        cp .env.example .env
-        php artisan key:generate
-        php artisan migrate --force
-        php artisan route:cache
-    - name: Run PHPUnit
-      env:
-        DB_HOST: "127.0.0.1"
-      run: php artisan test --coverage --min=80
+  phpunit:
+    name: PHPUnit
+    runs-on: ubuntu-22.04
+    services:
+      mysql:
+        image: mysql:8.0
+        ports:
+          - 3306:3306
+        env:
+          MYSQL_ROOT_PASSWORD: password
+          MYSQL_ROOT_HOST: "%"
+          MYSQL_DATABASE: laravel
+          MYSQL_USER: sail
+          MYSQL_PASSWORD: password
+          MYSQL_ALLOW_EMPTY_PASSWORD: 1
+        options: --health-cmd="mysqladmin ping" --health-interval=10s --health-timeout=5s --health-retries=3
+    steps:
+      - uses: actions/checkout@v4
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: 8.3
+          extensions: curl, dom, mbstring, libxml, zip, pcntl, pdo, pdo_mysql
+          ini-values: error_reporting=E_ALL
+          tools: composer:v2
+          coverage: xdebug
+      - name: Prepare Application
+        run: |
+          composer install --no-interaction --no-progress
+          cp .env.example .env
+          php artisan key:generate
+          php artisan migrate --force
+          php artisan route:cache
+      - name: Run PHPUnit
+        env:
+          DB_HOST: "127.0.0.1"
+        run: php artisan test --coverage --min=80
 
