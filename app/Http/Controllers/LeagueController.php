@@ -22,8 +22,6 @@ class LeagueController extends Controller
 
     /**
      * Display the teams in the league.
-     *
-     * @return AnonymousResourceCollection
      */
     public function teams(): AnonymousResourceCollection
     {
@@ -32,8 +30,6 @@ class LeagueController extends Controller
 
     /**
      * Display the ranked tables of the league.
-     *
-     * @return AnonymousResourceCollection
      */
     public function tables(): AnonymousResourceCollection
     {
@@ -46,7 +42,6 @@ class LeagueController extends Controller
      * Display the fixtures of the league.
      *
      * @param  \Illuminate\Support\Collection|null  $fixtures
-     * @return JsonResponse
      */
     public function fixtures($fixtures = null): JsonResponse
     {
@@ -61,8 +56,6 @@ class LeagueController extends Controller
 
     /**
      * Generate fixtures for the league.
-     *
-     * @return JsonResponse
      */
     public function generateFixtures(): JsonResponse
     {
@@ -79,8 +72,6 @@ class LeagueController extends Controller
 
     /**
      * Reset the league by truncating fixtures and tables,
-     *
-     * @return JsonResponse
      */
     public function reset(): JsonResponse
     {
@@ -94,7 +85,7 @@ class LeagueController extends Controller
         }
 
         return response()->json([
-            "message" => "League reset successfully.",
+            'message' => 'League reset successfully.',
         ]);
     }
 }

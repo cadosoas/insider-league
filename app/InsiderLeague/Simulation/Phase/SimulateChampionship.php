@@ -13,19 +13,19 @@ class SimulateChampionship
     {
         // get unplayed fixtures starting from the current week
         $fixtures = Fixture::unplayed()
-            ->where("week", ">=", $simulation->getCurrentWeek())
+            ->where('week', '>=', $simulation->getCurrentWeek())
             ->get()
-            ->groupBy("week");
+            ->groupBy('week');
 
         // need fake table for simulation
         $fakeTable = $simulation
             ->getTable()
-            ->mapWithKeys(fn($item) => [$item->team->id => $item->points])
+            ->mapWithKeys(fn ($item) => [$item->team->id => $item->points])
             ->toArray();
 
         // default champions array
         $champions = collect($simulation->getTable())
-            ->mapWithKeys(fn($item) => [$item->team->id => 0])
+            ->mapWithKeys(fn ($item) => [$item->team->id => 0])
             ->toArray();
 
         // run simulations
@@ -99,9 +99,9 @@ class SimulateChampionship
         $homeStrength = $fixture->home->strength;
         $awayStrength = $fixture->away->strength;
 
-        //////////////////////////////
+        // ////////////////////////////
         // calculate the scores based on the strength, form, and home advantage
-        //////////////////////////////
+        // ////////////////////////////
 
         $homeScore = ($homeStrength + $homeForm) / 2 + $homeAdvantage;
         $awayScore = ($awayStrength + $awayForm) / 2;
@@ -145,7 +145,7 @@ class SimulateChampionship
         $totalSimulations = array_sum($champions);
 
         return collect($champions)
-            ->map(fn($count) => round(($count / $totalSimulations) * 100, 2))
+            ->map(fn ($count) => round(($count / $totalSimulations) * 100, 2))
             ->sortDesc()
             ->toArray();
     }
@@ -154,8 +154,8 @@ class SimulateChampionship
     {
         $matches = Fixture::played()
             ->where(function ($query) use ($team) {
-                $query->where("home_id", $team->id)
-                    ->orWhere("away_id", $team->id);
+                $query->where('home_id', $team->id)
+                    ->orWhere('away_id', $team->id);
             })
             ->orderByDesc('week')
             ->take(3)

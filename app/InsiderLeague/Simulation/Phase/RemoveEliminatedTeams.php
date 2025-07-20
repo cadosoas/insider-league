@@ -27,7 +27,7 @@ class RemoveEliminatedTeams
 
         // if there are teams that cannot be champion, update their predictions
         // and set their possibility to false
-        if (!empty($isCannotBeChampions)) {
+        if (! empty($isCannotBeChampions)) {
 
             foreach ($isCannotBeChampions as $team) {
                 $predictions = $simulation->getPredictions();

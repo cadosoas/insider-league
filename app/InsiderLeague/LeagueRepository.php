@@ -11,7 +11,7 @@ class LeagueRepository
 {
     public function getRankedTable()
     {
-        return Table::with("team")->ranked()->get();
+        return Table::with('team')->ranked()->get();
     }
 
     public function generateFixtures(): Collection
@@ -22,7 +22,7 @@ class LeagueRepository
         $teamsKeyById = $teams->keyBy('id');
         $teamIds = $teams->pluck('id')->toArray();
 
-        /////////////////////////////////////
+        // ///////////////////////////////////
 
         $fixed = $teamIds[0];
         $rotating = array_slice($teamIds, 1);
@@ -43,7 +43,7 @@ class LeagueRepository
             $schedule[] = $week;
         }
 
-        $secondHalf = array_map(fn($week) => array_map(fn($m) => [$m[1], $m[0]], $week), $schedule);
+        $secondHalf = array_map(fn ($week) => array_map(fn ($m) => [$m[1], $m[0]], $week), $schedule);
 
         $fullSchedule = array_merge($schedule, $secondHalf);
 
@@ -65,7 +65,6 @@ class LeagueRepository
             }
             $weekNum++;
         }
-
 
         return $fixtures->sortBy('week')->values();
     }

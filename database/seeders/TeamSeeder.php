@@ -9,20 +9,20 @@ class TeamSeeder extends Seeder
 {
     const TEAMS = [
         [
-            "name" => "Manchester City",
-            "strength" => 5,
+            'name' => 'Manchester City',
+            'strength' => 5,
         ],
         [
-            "name" => "Arsenal",
-            "strength" => 4,
+            'name' => 'Arsenal',
+            'strength' => 4,
         ],
         [
-            "name" => "Liverpool",
-            "strength" => 4,
+            'name' => 'Liverpool',
+            'strength' => 4,
         ],
         [
-            "name" => "Aston Villa",
-            "strength" => 3,
+            'name' => 'Aston Villa',
+            'strength' => 3,
         ],
     ];
 

@@ -38,11 +38,6 @@ class MarkGuaranteedChampions
 
     /**
      * if a team is guaranteed to be champion
-     *
-     * @param $team
-     * @param $table
-     * @param $maxPoints
-     * @return bool
      */
     public function isChampionGuaranteed($team, $table, $maxPoints): bool
     {

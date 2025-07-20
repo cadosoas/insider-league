@@ -20,16 +20,16 @@ class PrepareSimulationData
         $simulation->setMaxPoints($maxPoints);
         $simulation->setRemainingMatches($remainingMatches);
 
-        ////////////////////////
+        // //////////////////////
         // Initialize predictions
-        ////////////////////////
+        // //////////////////////
 
         $predictions = [];
         foreach ($table as $team) {
             $predictions[] = [
-                "team" => $team->team->toArray(),
-                "percentage" => 0,
-                "possibility" => true
+                'team' => $team->team->toArray(),
+                'percentage' => 0,
+                'possibility' => true,
             ];
         }
 

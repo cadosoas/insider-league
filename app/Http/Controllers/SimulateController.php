@@ -32,11 +32,11 @@ class SimulateController extends Controller
         // if the league is finished
         if ($firstTable->played == Simulation::LEAGUE_FINISH_WEEK) {
             return response()->json([
-                "tables" => TableResource::collection($table),
-                "fixtures" => [],
-                "predictions" => [],
-                "current_week" => $firstTable->played,
-                "champion" => $firstTable->team->name,
+                'tables' => TableResource::collection($table),
+                'fixtures' => [],
+                'predictions' => [],
+                'current_week' => $firstTable->played,
+                'champion' => $firstTable->team->name,
             ]);
         }
 
@@ -44,8 +44,8 @@ class SimulateController extends Controller
         $currentWeek = $firstTable->played + 1;
 
         // get current week fixtures
-        $currentFixture = Fixture::with(["home", "away"])
-            ->where("week", $currentWeek)
+        $currentFixture = Fixture::with(['home', 'away'])
+            ->where('week', $currentWeek)
             ->get();
 
         // default predictions
@@ -53,16 +53,16 @@ class SimulateController extends Controller
 
         foreach ($table as $team) {
             $predictions[] = [
-                "team" => $team->team,
-                "percentage" => 0,
-                "possibility" => true
+                'team' => $team->team,
+                'percentage' => 0,
+                'possibility' => true,
             ];
         }
 
         // if the current week is less than or equal to SIMULATE_WEEK
         // start the simulation
         if ($currentWeek > Simulation::SIMULATION_START_WEEK) {
-            $predictions = (new Simulation())
+            $predictions = (new Simulation)
                 ->setTable($table)
                 ->setCurrentWeek($currentWeek)
                 ->simulate()
@@ -70,14 +70,13 @@ class SimulateController extends Controller
         }
 
         return response()->json([
-            "tables" => TableResource::collection($table),
-            "fixtures" => FixtureResource::collection($currentFixture),
-            "predictions" => PredictionResource::collection($predictions),
-            "current_week" => $currentWeek,
-            "champion" => null,
+            'tables' => TableResource::collection($table),
+            'fixtures' => FixtureResource::collection($currentFixture),
+            'predictions' => PredictionResource::collection($predictions),
+            'current_week' => $currentWeek,
+            'champion' => null,
         ]);
     }
-
 
     /**
      * Play all fixtures for the league.

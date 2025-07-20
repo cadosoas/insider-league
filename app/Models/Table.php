@@ -19,6 +19,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
  * @property int $points
  * @property \Illuminate\Support\Carbon|null $updated_at
  * @property Team $team
+ *
  * @method static Builder ranked()
  */
 class Table extends Model
@@ -31,16 +32,16 @@ class Table extends Model
     const CREATED_AT = null;
 
     protected $fillable = [
-        "team_id",
-        "played",
-        "wins",
-        "draws",
-        "losses",
-        "goals_for",
-        "goals_against",
-        "goal_difference",
-        "points",
-        "updated_at",
+        'team_id',
+        'played',
+        'wins',
+        'draws',
+        'losses',
+        'goals_for',
+        'goals_against',
+        'goal_difference',
+        'points',
+        'updated_at',
     ];
 
     /**
@@ -56,8 +57,7 @@ class Table extends Model
     /**
      * Scope a query to order tables by points, goal difference, and goals for.
      *
-     * @param Builder $query
-     * @return Builder
+     * @param  Builder  $query
      */
     public function scopeRanked($query): Builder
     {

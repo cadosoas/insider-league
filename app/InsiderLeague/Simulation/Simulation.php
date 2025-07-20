@@ -7,19 +7,23 @@ use Illuminate\Support\Facades\Pipeline;
 class Simulation
 {
     const SIMULATION_START_WEEK = 3;
-    const LEAGUE_FINISH_WEEK    = 6;
+
+    const LEAGUE_FINISH_WEEK = 6;
 
     protected $table;
+
     protected array $predictions = [];
+
     protected int $currentWeek = 0;
+
     protected bool $isChampionGuaranteed = false;
+
     protected int $remainingMatches = 0;
+
     protected int $maxPoints = 0;
 
     /**
      * Run the simulation.
-     *
-     * @return Simulation
      */
     public function simulate(): Simulation
     {
@@ -41,11 +45,10 @@ class Simulation
         return $this->table;
     }
 
-
     /**
      * Set the value of table
      *
-     * @return  self
+     * @return self
      */
     public function setTable($table)
     {
@@ -65,7 +68,7 @@ class Simulation
     /**
      * Set the value of isChampionGuaranteed
      *
-     * @return  self
+     * @return self
      */
     public function setIsChampionGuaranteed($isChampionGuaranteed)
     {
@@ -85,7 +88,7 @@ class Simulation
     /**
      * Set the value of currentWeek
      *
-     * @return  self
+     * @return self
      */
     public function setCurrentWeek($currentWeek)
     {
@@ -105,7 +108,7 @@ class Simulation
     /**
      * Set the value of remainingMatches
      *
-     * @return  self
+     * @return self
      */
     public function setRemainingMatches($remainingMatches)
     {
@@ -125,7 +128,7 @@ class Simulation
     /**
      * Set the value of maxPoints
      *
-     * @return  self
+     * @return self
      */
     public function setMaxPoints($maxPoints)
     {
@@ -145,7 +148,7 @@ class Simulation
     /**
      * Set the value of predictions
      *
-     * @return  self
+     * @return self
      */
     public function setPredictions($predictions)
     {

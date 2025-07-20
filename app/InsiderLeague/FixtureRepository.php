@@ -17,9 +17,9 @@ class FixtureRepository
         $fixture->play();
 
         $fixture->update([
-            "home_score" => $fixture->home_score,
-            "away_score" => $fixture->away_score,
-            "played_at" => now(),
+            'home_score' => $fixture->home_score,
+            'away_score' => $fixture->away_score,
+            'played_at' => now(),
         ]);
 
         $homeScore = $fixture->home_score;

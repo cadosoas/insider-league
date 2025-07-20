@@ -20,15 +20,15 @@ class TableResource extends JsonResource
     public function toArray(Request $request): array
     {
         return [
-            "team" => $this->resource->team->name,
-            "points" => $this->resource->points,
-            "played" => $this->resource->played,
-            "wins" => $this->resource->wins,
-            "draws" => $this->resource->draws,
-            "losses" => $this->resource->losses,
-            "goals_for" => $this->resource->goals_for,
-            "goals_against" => $this->resource->goals_against,
-            "goal_difference" => $this->resource->goal_difference,
+            'team' => $this->resource->team->name,
+            'points' => $this->resource->points,
+            'played' => $this->resource->played,
+            'wins' => $this->resource->wins,
+            'draws' => $this->resource->draws,
+            'losses' => $this->resource->losses,
+            'goals_for' => $this->resource->goals_for,
+            'goals_against' => $this->resource->goals_against,
+            'goal_difference' => $this->resource->goal_difference,
         ];
     }
 }
