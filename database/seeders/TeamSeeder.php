@@ -7,7 +7,7 @@ use Illuminate\Database\Seeder;
 
 class TeamSeeder extends Seeder
 {
-    const TEAMS = [
+    public const TEAMS = [
         [
             'name' => 'Manchester City',
             'strength' => 5,

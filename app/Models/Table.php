@@ -29,7 +29,7 @@ class Table extends Model
      *
      * @var string|null
      */
-    const CREATED_AT = null;
+    public const CREATED_AT = null;
 
     protected $fillable = [
         'team_id',

@@ -16,7 +16,8 @@ class SimulateController extends Controller
     public function __construct(
         protected LeagueRepository $leagueRepository,
         protected FixtureRepository $fixtureRepository
-    ) {}
+    ) {
+    }
 
     /**
      * Handle the simulation of the league.
@@ -62,7 +63,7 @@ class SimulateController extends Controller
         // if the current week is less than or equal to SIMULATE_WEEK
         // start the simulation
         if ($currentWeek > Simulation::SIMULATION_START_WEEK) {
-            $predictions = (new Simulation)
+            $predictions = (new Simulation())
                 ->setTable($table)
                 ->setCurrentWeek($currentWeek)
                 ->simulate()

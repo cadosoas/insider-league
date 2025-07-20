@@ -18,7 +18,8 @@ class LeagueController extends Controller
     public function __construct(
         protected LeagueRepository $leagueRepository,
         protected FixtureRepository $fixtureRepository
-    ) {}
+    ) {
+    }
 
     /**
      * Display the teams in the league.

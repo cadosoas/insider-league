@@ -6,20 +6,15 @@ use Illuminate\Support\Facades\Pipeline;
 
 class Simulation
 {
-    const SIMULATION_START_WEEK = 3;
+    public const SIMULATION_START_WEEK = 3;
 
-    const LEAGUE_FINISH_WEEK = 6;
+    public const LEAGUE_FINISH_WEEK = 6;
 
     protected $table;
-
     protected array $predictions = [];
-
     protected int $currentWeek = 0;
-
     protected bool $isChampionGuaranteed = false;
-
     protected int $remainingMatches = 0;
-
     protected int $maxPoints = 0;
 
     /**

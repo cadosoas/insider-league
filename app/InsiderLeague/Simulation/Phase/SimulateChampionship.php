@@ -7,7 +7,7 @@ use App\Models\Fixture;
 
 class SimulateChampionship
 {
-    const SIMULATION_COUNT = 100;
+    public const SIMULATION_COUNT = 100;
 
     public function handle(Simulation $simulation, \Closure $next)
     {
